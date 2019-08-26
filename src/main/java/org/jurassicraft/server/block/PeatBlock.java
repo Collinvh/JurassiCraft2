@@ -1,6 +1,7 @@
 package org.jurassicraft.server.block;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -43,6 +44,27 @@ public class PeatBlock extends Block implements PeatItem {
             }
         } else if (moisture < 7) {
             world.setBlockState(pos, state.withProperty(MOISTURE, 7), 2);
+        }
+        if (world.getBiome(pos) instanceof BiomeSwamp) {
+            for (int i = 0; i < 4; ++i) {
+                BlockPos blockpos = pos.add(rand.nextInt(9) - 1, rand.nextInt(10) - 3, rand.nextInt(9) - 1);
+
+                if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !world.isBlockLoaded(blockpos)) {
+                    return;
+                }
+
+                IBlockState iblockstate = world.getBlockState(blockpos.up());
+                IBlockState iblockstate1 = world.getBlockState(blockpos);
+                IBlockState iBlockState2 = world.getBlockState(blockpos.up(2));
+                IBlockState iBlockState3 = world.getBlockState(blockpos.up(3));
+
+
+                if (iblockstate1.getBlock() == Blocks.DIRT && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT) {
+                    if (iblockstate.getBlock() == Blocks.GRASS || iBlockState2.getBlock() == Blocks.GRASS || iBlockState3.getBlock() == Blocks.GRASS) {
+                        world.setBlockState(blockpos, BlockHandler.PEAT.getDefaultState());
+                    }
+                }
+            }
         }
     }
 

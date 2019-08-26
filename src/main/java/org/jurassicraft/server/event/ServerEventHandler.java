@@ -1,6 +1,8 @@
 package org.jurassicraft.server.event;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityVillager;
@@ -15,8 +17,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeDecorator;
+import net.minecraft.world.biome.BiomeSwamp;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.common.BiomeDictionary;
@@ -30,6 +35,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.jurassicraft.JurassiCraft;
 import org.jurassicraft.server.block.BlockHandler;
 import org.jurassicraft.server.block.FossilizedTrackwayBlock;
@@ -48,6 +54,7 @@ import org.jurassicraft.server.world.loot.Loot;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ServerEventHandler {
 	
@@ -66,7 +73,30 @@ public class ServerEventHandler {
     public static void onWorldLoad(final WorldEvent.Load event) {
         GameRuleHandler.register(event.getWorld());
     }
-    
+
+    @SubscribeEvent
+    public static void tickEvent(TickEvent.WorldTickEvent event) {
+        if (event.world.getTotalWorldTime() % 25 == 0) {
+            WorldServer world = event.world.getMinecraftServer().getWorld(0);
+            Chunk[] chunklist = world.getChunkProvider().getLoadedChunks().toArray(new Chunk[0]);
+            int randomChunk = ThreadLocalRandom.current().nextInt(0, chunklist.length);
+
+            Random random = new Random();
+            int zeroX = chunklist[randomChunk].getPos().getXStart() + random.nextInt(16);
+            int zeroZ = chunklist[randomChunk].getPos().getZStart() + random.nextInt(16);
+
+            if(!(world.getBiomeForCoordsBody(new BlockPos(zeroX, 0, zeroZ)) instanceof BiomeSwamp))
+                return;
+
+            for (int i = 255; i > -1; i--) {
+                if (world.getBlockState(new BlockPos(zeroX, i, zeroZ)).getBlock() instanceof BlockDirt && world.getBlockState(new BlockPos(zeroX, i + 1, zeroZ)).getBlock() instanceof BlockGrass) {
+                    world.setBlockState(new BlockPos(zeroX, i, zeroZ), BlockHandler.PEAT.getDefaultState());
+                    break;
+                }
+            }
+        }
+    }
+
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void blockRegistry(final RegistryEvent.Register<Block> e) {
     	e.getRegistry().register(BlockHandler.VINES.setRegistryName("minecraft", "vine"));
