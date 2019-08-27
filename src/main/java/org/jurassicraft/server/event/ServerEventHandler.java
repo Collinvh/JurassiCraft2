@@ -76,7 +76,7 @@ public class ServerEventHandler {
 
     @SubscribeEvent
     public static void tickEvent(TickEvent.WorldTickEvent event) {
-        if (event.world.getTotalWorldTime() % 25 == 0) {
+        if (event.world.getTotalWorldTime() % 20 == 0) {
             WorldServer world = event.world.getMinecraftServer().getWorld(0);
             Chunk[] chunklist = world.getChunkProvider().getLoadedChunks().toArray(new Chunk[0]);
             int randomChunk = ThreadLocalRandom.current().nextInt(0, chunklist.length);
@@ -84,13 +84,14 @@ public class ServerEventHandler {
             Random random = new Random();
             int zeroX = chunklist[randomChunk].getPos().getXStart() + random.nextInt(16);
             int zeroZ = chunklist[randomChunk].getPos().getZStart() + random.nextInt(16);
+            BlockPos.MutableBlockPos mutualBlockPos;
 
-            if(!(world.getBiomeForCoordsBody(new BlockPos(zeroX, 0, zeroZ)) instanceof BiomeSwamp))
+            if(!(world.getBiomeForCoordsBody(mutualBlockPos = new BlockPos.MutableBlockPos(zeroX, 0, zeroZ)) instanceof BiomeSwamp))
                 return;
 
             for (int i = 255; i > -1; i--) {
-                if (world.getBlockState(new BlockPos(zeroX, i, zeroZ)).getBlock() instanceof BlockDirt && world.getBlockState(new BlockPos(zeroX, i + 1, zeroZ)).getBlock() instanceof BlockGrass) {
-                    world.setBlockState(new BlockPos(zeroX, i, zeroZ), BlockHandler.PEAT.getDefaultState());
+                if (world.getBlockState(mutualBlockPos.setPos(zeroX, i, zeroZ)).getBlock() instanceof BlockDirt && world.getBlockState(new BlockPos.MutableBlockPos(zeroX, i + 1, zeroZ)).getBlock() instanceof BlockGrass) {
+                    world.setBlockState(mutualBlockPos.setPos(zeroX, i, zeroZ), BlockHandler.PEAT.getDefaultState());
                     break;
                 }
             }
