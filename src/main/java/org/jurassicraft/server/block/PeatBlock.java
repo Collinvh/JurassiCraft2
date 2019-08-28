@@ -14,6 +14,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeSwamp;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.jurassicraft.server.conf.JurassiCraftConfig;
 import org.jurassicraft.server.plugin.jei.category.moss.PeatItem;
 import org.jurassicraft.server.tab.TabHandler;
 
@@ -22,6 +23,7 @@ import java.util.Random;
 
 public class PeatBlock extends Block implements PeatItem {
     public static final PropertyInteger MOISTURE = PropertyInteger.create("moisture", 0, 7);
+    public int peatGenerationSpeed = JurassiCraftConfig.PLANT_GENERATION.peatGenerationSpeed;
 
     public PeatBlock() {
         super(Material.GROUND);
@@ -47,7 +49,7 @@ public class PeatBlock extends Block implements PeatItem {
         }
         if (world.getBiome(pos) instanceof BiomeSwamp) {
             for (int i = 0; i < 4; ++i) {
-                BlockPos blockpos = pos.add(rand.nextInt(9) - 1, rand.nextInt(10) - 3, rand.nextInt(9) - 1);
+                BlockPos blockpos = pos.add(rand.nextInt(peatGenerationSpeed + 1), rand.nextInt(peatGenerationSpeed + 1), rand.nextInt(peatGenerationSpeed + 1));
 
                 if (blockpos.getY() >= 0 && blockpos.getY() < 256 && !world.isBlockLoaded(blockpos)) {
                     return;

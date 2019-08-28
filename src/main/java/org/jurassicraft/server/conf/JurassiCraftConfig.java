@@ -72,6 +72,9 @@ public class JurassiCraftConfig { //TODO: move all structures to same parent pac
 
         @Config.Name("Petrified Tree Generation")
         public boolean petrifiedTreeGeneration = true;
+
+        @Config.Name("Peat Spread Speed")
+        public int peatSpreadSpeed = 1;
     }
 
     public static class PlantGeneration {
@@ -86,6 +89,10 @@ public class JurassiCraftConfig { //TODO: move all structures to same parent pac
 
         @Config.Name("Gracilaria Generation")
         public boolean gracilariaGeneration = true;
+
+        @Config.Name("Peat Spread Speed")
+        @Config.Comment("Lower is faster, Higher is slower!")
+        public int peatGenerationSpeed = 20;
     }
 
     public static class StructureGeneration {
