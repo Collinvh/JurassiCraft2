@@ -72,9 +72,6 @@ public class JurassiCraftConfig { //TODO: move all structures to same parent pac
 
         @Config.Name("Petrified Tree Generation")
         public boolean petrifiedTreeGeneration = true;
-
-        @Config.Name("Peat Spread Speed")
-        public int peatSpreadSpeed = 1;
     }
 
     public static class PlantGeneration {
