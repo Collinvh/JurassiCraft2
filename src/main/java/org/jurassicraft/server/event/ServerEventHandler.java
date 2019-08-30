@@ -90,7 +90,7 @@ public class ServerEventHandler {
                 return;
 
             for (int i = 255; i > -1; i--) {
-                if (world.getBlockState(mutualBlockPos.setPos(zeroX, i, zeroZ)).getBlock() instanceof BlockDirt && world.getBlockState(new BlockPos.MutableBlockPos(zeroX, i + 1, zeroZ)).getBlock() instanceof BlockGrass) {
+                if (world.getBlockState(mutualBlockPos.setPos(zeroX, i, zeroZ)).getBlock() instanceof BlockDirt && world.getBlockState(mutualBlockPos.setPos(zeroX, i + 1, zeroZ)).getBlock() instanceof BlockGrass) {
                     world.setBlockState(mutualBlockPos.setPos(zeroX, i, zeroZ), BlockHandler.PEAT.getDefaultState());
                     break;
                 }
