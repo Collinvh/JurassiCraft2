@@ -52,6 +52,7 @@ public class FoodHelper {
         registerFood(Blocks.DOUBLE_PLANT, FoodType.PLANT, 2000);
         registerFood(Blocks.BROWN_MUSHROOM, FoodType.PLANT, 250);
         registerFood(Blocks.RED_MUSHROOM, FoodType.PLANT, 250);
+        registerFood(Blocks.BEETROOTS, FoodType.PLANT, 2000);
 
         registerFood(ItemHandler.COCKROACHES, FoodType.INSECT, 250);
         registerFood(ItemHandler.CRICKETS, FoodType.INSECT, 250);
@@ -76,6 +77,8 @@ public class FoodHelper {
         }
 
         registerFood(Items.WHEAT, FoodType.PLANT, 1000);
+        registerFood(Items.BEETROOT, FoodType.PLANT, 1000);
+        registerFood(Items.BEETROOT_SEEDS, FoodType.PLANT, 100);
         registerFood(Items.WHEAT_SEEDS, FoodType.PLANT, 100);
         registerFood(Items.MELON_SEEDS, FoodType.PLANT, 100);
         registerFood(Items.PUMPKIN_SEEDS, FoodType.PLANT, 100);
