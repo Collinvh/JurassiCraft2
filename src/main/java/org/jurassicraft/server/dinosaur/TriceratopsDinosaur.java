@@ -2,8 +2,6 @@ package org.jurassicraft.server.dinosaur;
 
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
-import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
-import org.jurassicraft.client.model.animation.entity.TriceratopsAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.TriceratopsEntity;
@@ -33,9 +31,7 @@ public class TriceratopsDinosaur extends Dinosaur {
                 .setEggColorFemale(0x8F7B76, 0x73676A)
                 .setSpeed(0.3, 0.35)
                 .setAttackSpeed(1.3)
-				.shadowSize(1.0F)
-				.setAnimator(new TriceratopsAnimator())
-				.setHealth(10, 70)
+                .setHealth(10, 70)
                 .setStrength(2, 10)
                 .setMaximumAge(this.fromDays(45))
                 .setEyeHeight(0.45F, 1.8F)

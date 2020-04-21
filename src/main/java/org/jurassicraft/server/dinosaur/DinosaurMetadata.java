@@ -5,7 +5,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
-import org.jurassicraft.client.model.animation.EntityAnimator;
 import org.jurassicraft.server.entity.AnimalMetadata;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.DinosaurEntity;
@@ -71,9 +70,7 @@ public class DinosaurMetadata extends AnimalMetadata {
     private OverlayType[] overlayTypes = new OverlayType[]{};
     private int overlayCount;
     private int eyeTime = 4;
-    private EntityAnimator<?> animator;
-    private float shadowsize;
-
+    
     public DinosaurMetadata(final ResourceLocation identifier) {
     	super(identifier);
     }
@@ -122,10 +119,6 @@ public class DinosaurMetadata extends AnimalMetadata {
     public DinosaurMetadata setSizeY(final float baby, final float adult) {
         this.babySizeY = baby;
         this.adultSizeY = adult;
-        return this;
-    }
-    public DinosaurMetadata setAnimator(final EntityAnimator<?> animator) {
-        this.animator = animator;
         return this;
     }
     public DinosaurMetadata setEyeHeight(final float baby, final float adult) {
@@ -257,10 +250,6 @@ public class DinosaurMetadata extends AnimalMetadata {
         this.recipe = recipe;
         return this;
     }
-    public DinosaurMetadata shadowSize(final float shadowsize) {
-        this.shadowsize = shadowsize;
-        return this;
-    }
     public DinosaurMetadata setSpawn(final int chance, final Biome[]... allBiomes) {
         this.spawnChance = chance;
         List<Biome> spawnBiomes = new LinkedList<>();
@@ -380,8 +369,6 @@ public class DinosaurMetadata extends AnimalMetadata {
     {
         return 1500;
     }
-    public EntityAnimator<?> getAnimator() { return this.animator; }
-    public float getShadowSize() { return this.shadowsize; }
     public int getStorage() {
         return this.storage;
     }

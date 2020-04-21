@@ -1,8 +1,6 @@
 package org.jurassicraft.server.dinosaur;
 
 import org.jurassicraft.JurassiCraft;
-import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
-import org.jurassicraft.client.model.animation.entity.StegosaurusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.dinosaur.StegosaurusEntity;
 import org.jurassicraft.server.period.TimePeriod;
@@ -22,8 +20,6 @@ public class StegosaurusDinosaur extends Dinosaur{
                 .setEggColorFemale(0x8F7B76, 0x73676A)
                 .setSpeed(0.3, 0.35)
                 .setAttackSpeed(1.3)
-                .shadowSize(1.0F)
-                .setAnimator(new StegosaurusAnimator())
                 .setHealth(10, 70)
                 .setStrength(2, 10)
                 .setMaximumAge(this.fromDays(45))

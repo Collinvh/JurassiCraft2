@@ -139,7 +139,7 @@ public abstract class Dinosaur implements Comparable<Dinosaur> {
         return x < 0 ? x > -0.0001 ? 0 : x : x < 0.0001 ? 0 : x;
     }
 
-    public void init(String modid) {
+    public void init() {
 
     	for(final OverlayType type : this.metadata.getOverlays()) {
     		
@@ -175,14 +175,14 @@ public abstract class Dinosaur implements Comparable<Dinosaur> {
 					growthStageName = GrowthStage.ADULT.getKey();
 				}
 
-				this.maleTextures.put(growthStage, new ResourceLocation(modid, textureRoot + name + "_male_" + growthStageName + ".png"));
-				this.femaleTextures.put(growthStage, new ResourceLocation(modid, textureRoot + name + "_female_" + growthStageName + ".png"));
+				this.maleTextures.put(growthStage, new ResourceLocation(domain, textureRoot + name + "_male_" + growthStageName + ".png"));
+				this.femaleTextures.put(growthStage, new ResourceLocation(domain, textureRoot + name + "_female_" + growthStageName + ".png"));
 
 				for (OverlayType type : this.metadata.getOverlays()) {
 					if (growthStage != GrowthStage.SKELETON) {
 						Map<GrowthStageGenderContainer, ResourceLocation> overlay = this.overlayTextures.get(type);
-						final ResourceLocation female = new ResourceLocation(modid, textureRoot + name + "_female_" + growthStageName + "_" + type.toString() + ".png");
-						final ResourceLocation male = new ResourceLocation(modid, textureRoot + name + "_male_" + growthStageName + "_" + type.toString() + ".png");
+						final ResourceLocation female = new ResourceLocation(domain, textureRoot + name + "_female_" + growthStageName + "_" + type.toString() + ".png");
+						final ResourceLocation male = new ResourceLocation(domain, textureRoot + name + "_male_" + growthStageName + "_" + type.toString() + ".png");
 
 						try {
 							ClientProxy.MC.getResourceManager().getResource(female).getInputStream();
@@ -196,8 +196,8 @@ public abstract class Dinosaur implements Comparable<Dinosaur> {
 						}
 					} else {
 						Map<SkeletonOverlayContainer, ResourceLocation> overlay = this.skeletonOverlays.get(type);
-						final ResourceLocation fresh = new ResourceLocation(modid, textureRoot + name + "_fresh_skeleton_" + type.toString() + ".png");
-						final ResourceLocation fossilized = new ResourceLocation(modid, textureRoot + name + "_fossilized_skeleton_" + type.toString() + ".png");
+						final ResourceLocation fresh = new ResourceLocation(domain, textureRoot + name + "_fresh_skeleton_" + type.toString() + ".png");
+						final ResourceLocation fossilized = new ResourceLocation(domain, textureRoot + name + "_fossilized_skeleton_" + type.toString() + ".png");
 
 						try {
 							ClientProxy.MC.getResourceManager().getResource(fresh).getInputStream();

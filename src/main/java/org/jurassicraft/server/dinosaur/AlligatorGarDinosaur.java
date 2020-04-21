@@ -1,8 +1,6 @@
 package org.jurassicraft.server.dinosaur;
 
 import org.jurassicraft.JurassiCraft;
-import org.jurassicraft.client.model.animation.entity.AlligatorGarAnimator;
-import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.SleepTime;
 import org.jurassicraft.server.entity.ai.util.MovementType;
@@ -30,8 +28,6 @@ public class AlligatorGarDinosaur extends Dinosaur
                 .setFlee(true)
                 .setSpeed(0.2, 0.40)
                 .setAttackSpeed(1.5)
-                .shadowSize(1.0F)
-                .setAnimator(new AlligatorGarAnimator())
                 .setStrength(0.5, 3)
                 .setMaximumAge(this.fromDays(30))
                 .setEyeHeight(0.35F, 1.2F)

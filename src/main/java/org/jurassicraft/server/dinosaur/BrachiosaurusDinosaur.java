@@ -2,8 +2,6 @@ package org.jurassicraft.server.dinosaur;
 
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
-import org.jurassicraft.client.model.animation.entity.BrachiosaurusAnimator;
-import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.GrowthStage;
 import org.jurassicraft.server.entity.OverlayType;
@@ -37,9 +35,7 @@ public class BrachiosaurusDinosaur extends Dinosaur {
 	                .setSizeX(0.9F, 6.5F)
 	                .setSizeY(1.5F, 7.0F)
 	                .setStorage(54)
-					.shadowSize(1.0F)
-					.setAnimator(new BrachiosaurusAnimator())
-					.setDiet(Diet.HERBIVORE.get())
+	                .setDiet(Diet.HERBIVORE.get())
 	                .setBones("skull", "tooth", "tail_vertebrae", "shoulder", "ribcage", "pelvis", "neck_vertebrae", "hind_leg_bones", "front_leg_bones")
 	                .setHeadCubeName("head")
 	                .setScale(2.5F, 0.3F)

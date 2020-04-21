@@ -4,8 +4,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import org.jurassicraft.JurassiCraft;
-import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
-import org.jurassicraft.client.model.animation.entity.MicroraptorAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.MicroraptorEntity;
@@ -23,9 +21,7 @@ public class MicroraptorDinosaur extends Dinosaur {
 	                .setEggColorMale(0x142146, 0x101625)
 	                .setEggColorFemale(0x0E1423, 0x121827)
 	                .setSpeed(0.15, 0.20)
-					.shadowSize(1.0F)
-					.setAnimator(new MicroraptorAnimator())
-					.setAttackSpeed(1.3)
+	                .setAttackSpeed(1.3)
 	                .setHealth(4, 10)
 	                .setStrength(0.5, 2)
 	                .setMaximumAge(this.fromDays(30))

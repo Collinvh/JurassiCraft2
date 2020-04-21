@@ -2,8 +2,6 @@ package org.jurassicraft.server.dinosaur;
 
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
-import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
-import org.jurassicraft.client.model.animation.entity.TyrannosaurusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.TyrannosaurusEntity;
@@ -37,10 +35,8 @@ public class TyrannosaurusDinosaur extends Dinosaur {
                 .setEggColorMale(0x4E502C, 0x353731)
                 .setEggColorFemale(0xBA997E, 0x7D5D48)
                 .setHealth(10, 80)
-                .setSpeed(0.35, 0.4)
-				.shadowSize(1.0F)
-				.setAnimator(new TyrannosaurusAnimator())
-				.setAttackSpeed(1.1)
+                .setSpeed(0.35, 0.42)
+                .setAttackSpeed(1.1)
                 .setStrength(5, 20)
                 .setMaximumAge(this.fromDays(60))
                 .setEyeHeight(0.6F, 3.8F)
