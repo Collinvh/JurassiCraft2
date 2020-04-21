@@ -66,12 +66,11 @@ public class EntityHandler {
     public static final Dinosaur TYRANNOSAURUS = new TyrannosaurusDinosaur();
     public static final Dinosaur VELOCIRAPTOR = new VelociraptorDinosaur();
     public static final Animal GOAT = new GoatAnimal();
-//    public static final Dinosaur ALLIGATORGAR = new AlligatorGarDinosaur();
-    //public static final Dinosaur STEGeOSAURUS = new StegosaurusDinosaur();
-
-    private static final Map<Integer, Dinosaur> DINOSAURS = new HashMap<>();
+    public static final Map<Integer, Dinosaur> ADDON_DINOSAURS = new HashMap<>();
+    public static final Map<Integer, Dinosaur> DINOSAURS = new HashMap<>();
     private static final Map<Integer, Animal> ANIMALS = new HashMap<>();
     private static final Map<Dinosaur, Integer> DINOSAUR_IDS = new HashMap<>();
+    private static final Map<Dinosaur, Integer> ADDON_DINOSAUR_IDS = new HashMap<>();
     private static final Map<Animal, Integer> ANIMAL_IDS = new HashMap<>();
     private static final HashMap<TimePeriod, List<Dinosaur>> DINOSAUR_PERIODS = new HashMap<>();
 
@@ -93,17 +92,16 @@ public class EntityHandler {
     }
 
     public static void init() {
-    	
         registerDinosaur(0, VELOCIRAPTOR);
         registerDinosaur(1, COELACANTH);
         registerDinosaur(2, MICRORAPTOR);
         registerDinosaur(3, BRACHIOSAURUS);
         registerDinosaur(4, MUSSAURUS);
-        registerDinosaur(7, DILOPHOSAURUS);
-        registerDinosaur(9, GALLIMIMUS);
-        registerDinosaur(13, PARASAUROLOPHUS);
-        registerDinosaur(19, TRICERATOPS);
-        registerDinosaur(20, TYRANNOSAURUS);
+        registerDinosaur(5, DILOPHOSAURUS);
+        registerDinosaur(6, GALLIMIMUS);
+        registerDinosaur(7, PARASAUROLOPHUS);
+        registerDinosaur(8, TRICERATOPS);
+        registerDinosaur(9, TYRANNOSAURUS);
         
         registerAnimal(0, GOAT);
 //        registerDinosaur(22, ALLIGATORGAR);
@@ -152,7 +150,7 @@ public class EntityHandler {
         	
             dinosaurProgress.step(dinosaur.getIdentifier().toString());
 
-            dinosaur.init();
+            dinosaur.init("jurassicraft");
 
             boolean canSpawn = !(dinosaur instanceof Hybrid) && dinosaur.shouldRegister();
 
@@ -195,10 +193,22 @@ public class EntityHandler {
             EntityRegistry.removeSpawn(clazz, metadata.isMarineCreature() ? EnumCreatureType.WATER_CREATURE : EnumCreatureType.CREATURE, metadata.getSpawnBiomes());
             final boolean canSpawn = !(dinosaur instanceof Hybrid) && dinosaur.shouldRegister();
             addSpawn(canSpawn, clazz, dinosaur);
-            
+        }
+        for (final Dinosaur dinosaur : ADDON_DINOSAURS.values()) {
+            final DinosaurMetadata metadata = dinosaur.getMetadata();
+            final Class<? extends DinosaurEntity> clazz = metadata.getDinosaurClass();
+            EntityRegistry.removeSpawn(clazz, metadata.isMarineCreature() ? EnumCreatureType.WATER_CREATURE : EnumCreatureType.CREATURE, metadata.getSpawnBiomes());
+            final boolean canSpawn = !(dinosaur instanceof Hybrid) && dinosaur.shouldRegister();
+            addSpawn(canSpawn, clazz, dinosaur);
         }
     }
-    
+
+    private static void registerAddonDinosaurEntity(Class<? extends Entity> entity, ResourceLocation identifier, String modname, Class instance) {
+        String name = identifier.getResourceDomain() + "." + identifier.getResourcePath();
+        ResourceLocation registryName = new ResourceLocation(modname + ":entities." + identifier.getResourcePath());
+        EntityRegistry.registerModEntity(registryName, entity, name, entityId++, instance, 1024, 1, true);
+    }
+
     private static void registerDinosaurEntity(Class<? extends Entity> entity, ResourceLocation identifier) {
         String name = identifier.getResourceDomain() + "." + identifier.getResourcePath();
     	ResourceLocation registryName = new ResourceLocation("jurassicraft:entities." + identifier.getResourcePath());
@@ -239,6 +249,11 @@ public class EntityHandler {
 
         DINOSAURS.put(id, dinosaur);
         DINOSAUR_IDS.put(dinosaur, id);
+    }
+
+    public static void registerAddonDinosaur(int id, Dinosaur dinosaur) {
+        ADDON_DINOSAURS.put(id, dinosaur);
+        ADDON_DINOSAUR_IDS.put(dinosaur, id);
     }
 
     public static Dinosaur getDinosaurById(int id) {

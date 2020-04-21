@@ -5,6 +5,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
+import org.jurassicraft.client.model.animation.entity.ParasaurolophusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.ParasaurolophusEntity;
@@ -35,7 +37,9 @@ public class ParasaurolophusDinosaur extends Dinosaur {
                 .setSpeed(0.35, 0.41)
                 .setStrength(2, 8)
                 .setMaximumAge(this.fromDays(45))
-                .setEyeHeight(0.45F, 2.45F)
+				.shadowSize(1.0F)
+				.setAnimator(new ParasaurolophusAnimator())
+				.setEyeHeight(0.45F, 2.45F)
                 .setSizeX(0.5F, 2.5F)
                 .setSizeY(0.8F, 3.5F)
                 .setOffset(0.0F, 0.0F, 0.6F)

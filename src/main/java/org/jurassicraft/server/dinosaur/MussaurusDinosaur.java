@@ -5,6 +5,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
+import org.jurassicraft.client.model.animation.entity.MussaurusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.MussaurusEntity;
@@ -33,7 +35,9 @@ public class MussaurusDinosaur extends Dinosaur {
                 .setSpeed(0.25, 0.32)
                 .setStrength(1, 2)
                 .setMaximumAge(this.fromDays(30))
-                .setEyeHeight(0.25F, 1.2F)
+				.shadowSize(1.0F)
+				.setAnimator(new MussaurusAnimator())
+				.setEyeHeight(0.25F, 1.2F)
                 .setSizeX(0.25F, 1F)
                 .setSizeY(0.2F, 0.9F)
                 .setStorage(9)

@@ -460,18 +460,14 @@ public enum RenderingHandler {
 
     public void preInit() {
         TabulaModelHandler.INSTANCE.addDomain(JurassiCraft.MODID);
-        registerRenderInfo(EntityHandler.BRACHIOSAURUS, new BrachiosaurusAnimator(), 1.5F);
-        registerRenderInfo(EntityHandler.COELACANTH, new CoelacanthAnimator(), 0.0F);
-//        registerRenderInfo(EntityHandler.ALLIGATORGAR, new AlligatorGarAnimator(), 0.0F);
-        registerRenderInfo(EntityHandler.DILOPHOSAURUS, new DilophosaurusAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.GALLIMIMUS, new GallimimusAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.PARASAUROLOPHUS, new ParasaurolophusAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.MICRORAPTOR, new MicroraptorAnimator(), 0.45F);
-        registerRenderInfo(EntityHandler.MUSSAURUS, new MussaurusAnimator(), 0.8F);
-        registerRenderInfo(EntityHandler.TRICERATOPS, new TriceratopsAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.TYRANNOSAURUS, new TyrannosaurusAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.VELOCIRAPTOR, new VelociraptorAnimator(), 0.45F);
-        //registerRenderInfo(EntityHandler.STEGOSAURUS, new StegosaurusAnimator(), 0.65F);
+
+        for (Dinosaur dinosaur : EntityHandler.DINOSAURS.values()) {
+            if (dinosaur.getMetadata().getAnimator() != null) {
+                registerRenderInfo(dinosaur);
+            } else {
+                JurassiCraft.getLogger().error(dinosaur + " his animator failed to load, make sure you add .setAnimator(new *Animator*)");
+            }
+        }
 
         RenderingRegistry.registerEntityRenderingHandler(PaddockSignEntity.class, new PaddockSignRenderer());
         RenderingRegistry.registerEntityRenderingHandler(AttractionSignEntity.class, new AttractionSignRenderer());
@@ -578,8 +574,8 @@ public enum RenderingHandler {
         registerBlockRenderer(block, 0, path);
     }
 
-    private static void registerRenderInfo(Dinosaur dinosaur, EntityAnimator<?> animator, float shadowSize) {
-        registerRenderInfo(new DinosaurRenderInfo(dinosaur, animator, shadowSize));
+    private static void registerRenderInfo(Dinosaur dinosaur) {
+        registerRenderInfo(new DinosaurRenderInfo(dinosaur, dinosaur.getMetadata().getAnimator(), dinosaur.getMetadata().getShadowSize()));
     }
 
     private static void registerRenderInfo(DinosaurRenderInfo renderInfo) {

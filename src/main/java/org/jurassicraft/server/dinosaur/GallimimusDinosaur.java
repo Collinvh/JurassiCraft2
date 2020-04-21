@@ -2,6 +2,8 @@ package org.jurassicraft.server.dinosaur;
 
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
+import org.jurassicraft.client.model.animation.entity.GallimimusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.GallimimusEntity;
@@ -34,7 +36,9 @@ public class GallimimusDinosaur extends Dinosaur {
                 .setSpeed(0.2, 0.3)
                 .setStrength(1, 5)
                 .setMaximumAge(this.fromDays(35))
-                .setEyeHeight(0.58F, 2.7F)
+				.shadowSize(1.0F)
+				.setAnimator(new GallimimusAnimator())
+				.setEyeHeight(0.58F, 2.7F)
                 .setSizeX(0.3F, 1.2F)
                 .setSizeY(0.55F, 2.25F)
                 .setStorage(27)

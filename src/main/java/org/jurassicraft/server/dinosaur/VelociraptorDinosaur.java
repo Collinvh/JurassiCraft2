@@ -5,6 +5,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
+import org.jurassicraft.client.model.animation.entity.VelociraptorAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.SleepTime;
@@ -32,7 +34,9 @@ public class VelociraptorDinosaur extends Dinosaur {
                 .setAttackSpeed(1.25)
                 .setHealth(10, 35)
                 .setStrength(1, 8)
-                .setMaximumAge(this.fromDays(45))
+				.shadowSize(1.0F)
+				.setAnimator(new VelociraptorAnimator())
+				.setMaximumAge(this.fromDays(45))
                 .setEyeHeight(0.45F, 1.7F)
                 .setSizeX(0.5F, 1.0F)
                 .setSizeY(0.5F, 1.8F)
