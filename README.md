@@ -6,26 +6,37 @@ JurassiCraft is a mod made to bring prehistoric creatures to the world of Minecr
 # Contributors
 
 ### JurassiCraft Council
-CarrotJet   
-Cody
 
 ### Developers
-Reuxertz    
-AnarchCassius   
-Collin     
-NeusFear     
-SanAndreasP     
-Shrek5InTheatres2019     
-Compaszer     
-PT400C     
 
 ### Modelers / Texturers
-CarrotJet   
-RaptorWhisper   
-HarvNut     
-Andreas     
 
 ### Special Mentions for all JurassiCraft projects
+Reuxertz    
+
+AnarchCassius   
+
+Collin     
+
+NeusFear     
+
+SanAndreasP     
+
+Shrek5InTheatres2019     
+
+Compaszer     
+
+PT400C     
+
+RaptorWhisper   
+
+HarvNut     
+
+Andreas  
+
+CarrotJet   
+
+Cody
 
 Jabelar
 
