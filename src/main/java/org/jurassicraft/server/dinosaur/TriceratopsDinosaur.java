@@ -2,6 +2,7 @@ package org.jurassicraft.server.dinosaur;
 
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.TriceratopsAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.TriceratopsEntity;
@@ -35,6 +36,7 @@ public class TriceratopsDinosaur extends Dinosaur {
                 .setStrength(2, 10)
                 .setMaximumAge(this.fromDays(45))
                 .setEyeHeight(0.45F, 1.8F)
+				.setAnimator(new TriceratopsAnimator())
                 .setSizeX(0.35F, 2.5F)
                 .setSizeY(0.6F, 3.0F)
                 .setStorage(36)

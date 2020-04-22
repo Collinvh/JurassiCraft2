@@ -9,7 +9,6 @@ import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.jurassicraft.JurassiCraft;
-import org.jurassicraft.client.model.animation.EntityAnimation;
 import org.jurassicraft.server.api.Animatable;
 import org.jurassicraft.server.api.Hybrid;
 import org.jurassicraft.server.conf.JurassiCraftConfig;
@@ -35,10 +34,7 @@ import org.jurassicraft.server.entity.vehicle.TransportHelicopterEntity;
 import org.jurassicraft.server.message.SpecialAnimationMessage;
 import org.jurassicraft.server.period.TimePeriod;
 
-import net.ilexiconn.llibrary.LLibrary;
 import net.ilexiconn.llibrary.server.animation.Animation;
-import net.ilexiconn.llibrary.server.animation.IAnimatedEntity;
-import net.ilexiconn.llibrary.server.network.AnimationMessage;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving.SpawnPlacementType;
 import net.minecraft.entity.EntityLivingBase;
@@ -48,8 +44,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.ProgressManager;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
@@ -69,7 +63,7 @@ public class EntityHandler {
 //    public static final Dinosaur ALLIGATORGAR = new AlligatorGarDinosaur();
     //public static final Dinosaur STEGeOSAURUS = new StegosaurusDinosaur();
 
-    private static final Map<Integer, Dinosaur> DINOSAURS = new HashMap<>();
+    public static final Map<Integer, Dinosaur> DINOSAURS = new HashMap<>();
     private static final Map<Integer, Animal> ANIMALS = new HashMap<>();
     private static final Map<Dinosaur, Integer> DINOSAUR_IDS = new HashMap<>();
     private static final Map<Animal, Integer> ANIMAL_IDS = new HashMap<>();
@@ -93,17 +87,17 @@ public class EntityHandler {
     }
 
     public static void init() {
-    	
+
         registerDinosaur(0, VELOCIRAPTOR);
         registerDinosaur(1, COELACANTH);
         registerDinosaur(2, MICRORAPTOR);
         registerDinosaur(3, BRACHIOSAURUS);
         registerDinosaur(4, MUSSAURUS);
-        registerDinosaur(7, DILOPHOSAURUS);
-        registerDinosaur(9, GALLIMIMUS);
-        registerDinosaur(13, PARASAUROLOPHUS);
-        registerDinosaur(19, TRICERATOPS);
-        registerDinosaur(20, TYRANNOSAURUS);
+        registerDinosaur(5, DILOPHOSAURUS);
+        registerDinosaur(6, GALLIMIMUS);
+        registerDinosaur(7, PARASAUROLOPHUS);
+        registerDinosaur(8, TRICERATOPS);
+        registerDinosaur(9, TYRANNOSAURUS);
         
         registerAnimal(0, GOAT);
 //        registerDinosaur(22, ALLIGATORGAR);
@@ -163,7 +157,7 @@ public class EntityHandler {
             }
 
             Class<? extends DinosaurEntity> clazz = dinosaur.getMetadata().getDinosaurClass();
-            registerDinosaurEntity(clazz, dinosaur.getIdentifier());
+            registerDinosaurEntity(clazz, dinosaur.getIdentifier(), dinosaur);
 
             addSpawn(canSpawn, clazz, dinosaur);
         }
@@ -199,28 +193,28 @@ public class EntityHandler {
         }
     }
     
-    private static void registerDinosaurEntity(Class<? extends Entity> entity, ResourceLocation identifier) {
+    private static void registerDinosaurEntity(Class<? extends DinosaurEntity> entity, ResourceLocation identifier, Dinosaur dinosaur) {
         String name = identifier.getResourceDomain() + "." + identifier.getResourcePath();
     	ResourceLocation registryName = new ResourceLocation("jurassicraft:entities." + identifier.getResourcePath());
-        EntityRegistry.registerModEntity(registryName, entity, name, entityId++, JurassiCraft.INSTANCE, 1024, 1, true);
+        EntityRegistry.registerModEntity(registryName, entity, name, entityId++, JurassiCraft.INSTANCE, dinosaur.getMetadata().getTrackingRange(), 1, true);
     }
     
     private static void registerAnimalEntity(Class<? extends EntityLivingBase> entity, ResourceLocation identifier, int primary, int secondary) {
     	String name = identifier.getResourceDomain() + "." + identifier.getResourcePath();
     	ResourceLocation registryName = new ResourceLocation("jurassicraft:entities." + identifier.getResourcePath());
-        EntityRegistry.registerModEntity(registryName, entity, name, entityId++, JurassiCraft.INSTANCE, 1024, 1, true, primary, secondary);
+        EntityRegistry.registerModEntity(registryName, entity, name, entityId++, JurassiCraft.INSTANCE, JurassiCraftConfig.ENTITIES.trackingrange, 1, true, primary, secondary);
     }
     
     private static void registerEntity(Class<? extends Entity> entity, String name) {
         String formattedName = name.toLowerCase(Locale.ENGLISH).replaceAll(" ", "_");
         ResourceLocation registryName = new ResourceLocation("jurassicraft:entities." + formattedName);
-        EntityRegistry.registerModEntity(registryName, entity, "jurassicraft." + formattedName, entityId++, JurassiCraft.INSTANCE, 1024, 1, true);
+        EntityRegistry.registerModEntity(registryName, entity, "jurassicraft." + formattedName, entityId++, JurassiCraft.INSTANCE, JurassiCraftConfig.ENTITIES.trackingrange, 1, true);
     }
 
     private static void registerEntity(Class<? extends Entity> entity, String name, int primary, int secondary) {
         String formattedName = name.toLowerCase(Locale.ENGLISH).replaceAll(" ", "_");
         ResourceLocation registryName = new ResourceLocation("jurassicraft:entities." + formattedName);
-        EntityRegistry.registerModEntity(registryName, entity, "jurassicraft." + formattedName, entityId++, JurassiCraft.INSTANCE, 1024, 1, true, primary, secondary);
+        EntityRegistry.registerModEntity(registryName, entity, "jurassicraft." + formattedName, entityId++, JurassiCraft.INSTANCE, JurassiCraftConfig.ENTITIES.trackingrange, 1, true, primary, secondary);
     }
     
     public static void registerAnimal(int id, Animal animal) {

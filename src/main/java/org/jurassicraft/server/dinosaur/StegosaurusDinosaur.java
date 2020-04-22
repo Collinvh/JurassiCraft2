@@ -1,6 +1,7 @@
 package org.jurassicraft.server.dinosaur;
 
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.StegosaurusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.dinosaur.StegosaurusEntity;
 import org.jurassicraft.server.period.TimePeriod;
@@ -24,6 +25,7 @@ public class StegosaurusDinosaur extends Dinosaur{
                 .setStrength(2, 10)
                 .setMaximumAge(this.fromDays(45))
                 .setEyeHeight(0.45F, 1.8F)
+                .setAnimator(new StegosaurusAnimator())
                 .setSizeX(3.0F, 4.0F)
                 .setSizeY(2.0F, 3.5F)
                 .setStorage(36)

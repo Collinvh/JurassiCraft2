@@ -5,6 +5,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.MussaurusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.MussaurusEntity;
@@ -37,6 +38,8 @@ public class MussaurusDinosaur extends Dinosaur {
                 .setSizeX(0.25F, 1F)
                 .setSizeY(0.2F, 0.9F)
                 .setStorage(9)
+				.setAnimator(new MussaurusAnimator())
+				.setTrackingRange(64)
                 .setDiet(Diet.HERBIVORE.get())
                 .setBones("arm_bones", "leg_bones", "neck_vertebrae", "pelvis", "ribcage", "shoulder", "skull", "tail_vertebrae", "teeth")
                 .setHeadCubeName("Head1")

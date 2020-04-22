@@ -2,6 +2,7 @@ package org.jurassicraft.server.dinosaur;
 
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.GallimimusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.GallimimusEntity;
@@ -38,10 +39,12 @@ public class GallimimusDinosaur extends Dinosaur {
                 .setSizeX(0.3F, 1.2F)
                 .setSizeY(0.55F, 2.25F)
                 .setStorage(27)
+				.setAnimator(new GallimimusAnimator())
                 .setDiet(Diet.HERBIVORE.get().withModule(new Diet.DietModule(FoodType.INSECT).withCondition(entity -> entity.getAgePercentage() < 25)))
                 .setBones("skull", "tail_vertebrae", "shoulder", "ribcage", "pelvis", "neck_vertebrae", "leg_bones", "foot_bones", "arm_bones")
                 .setHeadCubeName("Head Base")
                 .setScale(0.85F, 0.2F)
+				.setTrackingRange(64)
                 .setImprintable(true)
                 .setFlee(true)
                 .setFlockSpeed(1.4F)

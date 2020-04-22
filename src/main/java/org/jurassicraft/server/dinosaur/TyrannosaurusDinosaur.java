@@ -2,6 +2,7 @@ package org.jurassicraft.server.dinosaur;
 
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.TyrannosaurusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.TyrannosaurusEntity;
@@ -40,6 +41,7 @@ public class TyrannosaurusDinosaur extends Dinosaur {
                 .setStrength(5, 20)
                 .setMaximumAge(this.fromDays(60))
                 .setEyeHeight(0.6F, 3.8F)
+				.setAnimator(new TyrannosaurusAnimator())
                 .setSizeX(0.45F, 3.0F)
                 .setSizeY(0.8F, 3.0F)
                 .setStorage(54)

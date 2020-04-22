@@ -37,6 +37,7 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemHandler {
+    public static final Map<String, Item> ITEMS = new HashMap<>();
     public static final Map<TreeType, AncientDoorItem> ANCIENT_DOORS = new HashMap<>();
 
     public static final PlasterAndBandageItem PLASTER_AND_BANDAGE = new PlasterAndBandageItem();
@@ -316,21 +317,21 @@ public class ItemHandler {
                     if (!FOSSILS.containsKey(boneType)) {
                         FossilItem fossil = new FossilItem(boneType, false);
                         FOSSILS.put(boneType, fossil);
-                        registerItem(fossil, boneType);
+                        registerItem(fossil, boneType, false);
                     }
                 }
 
                 if (!FRESH_FOSSILS.containsKey(boneType)) {
                     FossilItem fossil = new FossilItem(boneType, true);
                     FRESH_FOSSILS.put(boneType, fossil);
-                    registerItem(fossil, boneType + " Fresh");
+                    registerItem(fossil, boneType + " Fresh", false);
                 }
             }
         }
 
         registerItem(SPAWN_EGG, "Dino Spawn Egg");
         registerItem(FIELD_GUIDE, "Field Guide");
-        registerItem(AMBER, "Amber");
+        registerItem(AMBER, "Amber", false);
         registerItem(SEA_LAMPREY, "Sea Lamprey");
         registerItem(PLASTER_AND_BANDAGE, "Plaster And Bandage");
         registerItem(EMPTY_TEST_TUBE, "Empty Test Tube");
@@ -347,19 +348,19 @@ public class ItemHandler {
         registerItem(PETRI_DISH_AGAR, "Petri Dish Agar");
         registerItem(PLANT_CELLS_PETRI_DISH, "Plant Cells Petri Dish");
         registerItem(PADDOCK_SIGN, "Paddock Sign");
-        registerItem(ATTRACTION_SIGN, "Attraction Sign");
+        registerItem(ATTRACTION_SIGN, "Attraction Sign", false);
         registerItem(MURAL, "Mural");
-        registerItem(DNA, "DNA");
-        registerItem(SOFT_TISSUE, "Soft Tissue");
-        registerItem(SYRINGE, "Syringe");
-        registerItem(EGG, "Dino Egg");
-        registerItem(HATCHED_EGG, "Hatched Egg");
-        registerItem(PLANT_SOFT_TISSUE, "Plant Soft Tissue");
-        registerItem(PLANT_DNA, "Plant DNA");
+        registerItem(DNA, "DNA", false);
+        registerItem(SOFT_TISSUE, "Soft Tissue", false);
+        registerItem(SYRINGE, "Syringe", false);
+        registerItem(EGG, "Dino Egg", false);
+        registerItem(HATCHED_EGG, "Hatched Egg", false);
+        registerItem(PLANT_SOFT_TISSUE, "Plant Soft Tissue", false);
+        registerItem(PLANT_DNA, "Plant DNA", false);
         registerItem(IRON_BLADES, "Iron Blades");
         registerItem(IRON_ROD, "Iron Rod");
         registerItem(PLANT_CELLS, "Plant Cells");
-        registerItem(PLANT_CALLUS, "Plant Callus");
+        registerItem(PLANT_CALLUS, "Plant Callus", false);
         registerItem(TRACKER, "Tracker");
         registerItem(BASIC_CIRCUIT, "Basic Circuit");
         registerItem(ADVANCED_CIRCUIT, "Advanced Circuit");
@@ -367,8 +368,8 @@ public class ItemHandler {
         registerItem(KEYBOARD, "Keyboard");
         registerItem(DNA_ANALYZER, "DNA Analyzer");
 
-        registerItem(DINOSAUR_MEAT, "Dinosaur Meat");
-        registerItem(DINOSAUR_STEAK, "Dinosaur Steak");
+        registerItem(DINOSAUR_MEAT, "Dinosaur Meat", false);
+        registerItem(DINOSAUR_STEAK, "Dinosaur Steak", false);
 
         registerItem(PLANT_FOSSIL, "Plant Fossil");
         registerItem(TWIG_FOSSIL, "Twig Fossil");
@@ -379,9 +380,9 @@ public class ItemHandler {
         registerItem(AMBER_KEYCHAIN, "Amber Keychain");
         registerItem(MR_DNA_KEYCHAIN, "Mr DNA Keychain");
 
-        registerItem(DISPLAY_BLOCK_ITEM, "Display Block Item");
+        registerItem(DISPLAY_BLOCK_ITEM, "Display Block Item", false);
 
-       registerItem(DINO_SCANNER, "Dino Scanner");
+        registerItem(DINO_SCANNER, "Dino Scanner");
 
         registerItem(GYPSUM_POWDER, "Gypsum Powder");
 
@@ -431,7 +432,7 @@ public class ItemHandler {
         registerItem(CAR_TIRE, "Car Tire");
         registerItem(CAR_WINDSCREEN, "Car Windscreen");
         registerItem(UNFINISHED_CAR, "Unfinished Car");
-        registerItem(VEHICLE_ITEM, "Vehicle Item");
+        registerItem(VEHICLE_ITEM, "Vehicle Item", false);
 
         registerItem(JURASSICRAFT_THEME_DISC, "Disc JurassiCraft Theme");
         registerItem(TROODONS_AND_RAPTORS_DISC, "Disc Troodons And Raptors");
@@ -448,13 +449,13 @@ public class ItemHandler {
         registerItem(LUNCH_BOX, "Lunch Box");
         registerItem(STAMP_SET, "Stamp Set");
 
-        registerItem(INGEN_JOURNAL, "InGen Journal");
+        registerItem(INGEN_JOURNAL, "InGen Journal", false);
         
         registerItem(DART_GUN, "Dart Gun");
-        registerItem(DART_TRANQUILIZER, "Dart Tranquilizer");
-        registerItem(DART_POISON_CYCASIN, "Dart Poison Cycasin");
-        registerItem(DART_POISON_EXECUTIONER_CONCOCTION, "Dart Poison Executioner Concoction");
-        registerItem(DART_TIPPED_POTION, "Dart Tipped Potion");
+        registerItem(DART_TRANQUILIZER, "Dart Tranquilizer", false);
+        registerItem(DART_POISON_CYCASIN, "Dart Poison Cycasin", false);
+        registerItem(DART_POISON_EXECUTIONER_CONCOCTION, "Dart Poison Executioner Concoction", false);
+        registerItem(DART_TIPPED_POTION, "Dart Tipped Potion", false);
         for (TreeType type : TreeType.values()) {
             registerTreeType(type);
         }
@@ -469,10 +470,18 @@ public class ItemHandler {
         String typeName = type.name();
         AncientDoorItem door = new AncientDoorItem(BlockHandler.ANCIENT_DOORS.get(type));
         ANCIENT_DOORS.put(type, door);
-        registerItem(door, typeName + " Door Item");
+        registerItem(door, typeName + " Door Item", false);
     }
-
     public static void registerItem(Item item, String name) {
+        ITEMS.put(name,item);
+        String formattedName = name.toLowerCase(Locale.ENGLISH).replaceAll(" ", "_").replaceAll("'", "");
+        item.setUnlocalizedName(formattedName);
+        RegistryHandler.registerItem(item, formattedName);
+    }
+    public static void registerItem(Item item, String name, boolean render) {
+        if (render == true) {
+            ITEMS.put(name, item);
+        }
         String formattedName = name.toLowerCase(Locale.ENGLISH).replaceAll(" ", "_").replaceAll("'", "");
         item.setUnlocalizedName(formattedName);
         RegistryHandler.registerItem(item, formattedName);

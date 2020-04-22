@@ -1,6 +1,7 @@
 package org.jurassicraft.server.dinosaur;
 
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.AlligatorGarAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.SleepTime;
 import org.jurassicraft.server.entity.ai.util.MovementType;
@@ -34,6 +35,8 @@ public class AlligatorGarDinosaur extends Dinosaur
                 .setSizeX(0.1F, 1.1F)
                 .setSizeY(0.02F, .4F)
                 .setStorage(9)
+                .setAnimator(new AlligatorGarAnimator())
+                .setTrackingRange(64)
                 .setDiet(Diet.PISCIVORE.get().withModule(new Diet.DietModule(FoodType.FILTER)))
                 .setSleepTime(SleepTime.NO_SLEEP)
                 .setBones("anal_fin", "caudal_fin", "first_dorsal_fin", "pectoral_fin_bones", "pelvic_fin_bones", "second_dorsal_fin", "skull", "spine", "teeth")

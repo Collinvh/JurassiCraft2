@@ -169,7 +169,7 @@ public enum RenderingHandler {
         registerBlockRenderer(GRAMINIDITES_BAMBUSOIDES, "graminidites_bambusoides");
         registerBlockRenderer(BlockHandler.ENALLHELIA, "enallhelia");
         registerBlockRenderer(BlockHandler.AULOPORA, "aulopora");
-        
+
         registerBlockRenderer(BlockHandler.CLADOCHONUS, "cladochonus");
         registerBlockRenderer(BlockHandler.LITHOSTROTION, "lithostrotion");
         registerBlockRenderer(BlockHandler.STYLOPHYLLOPSIS, "stylophyllopsis");
@@ -266,109 +266,31 @@ public enum RenderingHandler {
         registerBlockRenderer(TOUR_RAIL_MEDIUM, "tour_rail_stripe.tbl_jurassicraft");
         registerBlockRenderer(TOUR_RAIL_FAST, "tour_rail_stripe.tbl_jurassicraft");
 
-        registerItemRenderer(TRACKER);
-        registerItemRenderer(PLANT_CELLS_PETRI_DISH);
-        registerItemRenderer(PLANT_CELLS);
-        registerItemRenderer(GROWTH_SERUM);
-        registerItemRenderer(BREEDING_WAND);
-        registerItemRenderer(BIRTHING_WAND);
-        registerItemRenderer(PREGNANCY_TEST);
-        registerItemRenderer(IRON_ROD);
-        registerItemRenderer(IRON_BLADES);
-        registerItemRenderer(PETRI_DISH);
-        registerItemRenderer(PETRI_DISH_AGAR);
-        registerItemRenderer(PLASTER_AND_BANDAGE);
+        registerItemRenderer(AMBER, 0, "amber_mosquito");
+        registerItemRenderer(AMBER, 1, "amber_aphid");
 
-        registerItemRenderer(FUN_FRIES);
-        registerItemRenderer(OILED_POTATO_STRIPS);
-        registerItemRenderer(LUNCH_BOX);
-        registerItemRenderer(STAMP_SET);
-
-        registerItemRenderer(INGEN_JOURNAL);
+        registerItemRenderer(DART_TRANQUILIZER, "dart_colored");
+        registerItemRenderer(DART_POISON_CYCASIN, "dart_colored");
+        registerItemRenderer(DART_POISON_EXECUTIONER_CONCOCTION, "dart_colored");
+        registerItemRenderer(DART_TIPPED_POTION, "dart_colored");
+        for (Item item : ITEMS.values()) {
+            registerItemRenderer(item);
+        }
 
         for (Integer id : EntityHandler.getDinosaurs().keySet()) {
             registerItemRenderer(SPAWN_EGG, id, "dino_spawn_egg");
         }
 
-        registerItemRenderer(PADDOCK_SIGN);
-
         for (AttractionSignEntity.AttractionSignType type : AttractionSignEntity.AttractionSignType.values()) {
             registerItemRenderer(ATTRACTION_SIGN, type.ordinal(), "attraction_sign_" + type.name().toLowerCase(Locale.ENGLISH));
         }
 
-        registerItemRenderer(EMPTY_TEST_TUBE);
-        registerItemRenderer(EMPTY_SYRINGE);
-        registerItemRenderer(STORAGE_DISC);
-        registerItemRenderer(DISC_DRIVE, "disc_reader");
-        registerItemRenderer(LASER);
-        registerItemRenderer(DNA_NUCLEOTIDES, "dna_base_material");
-        registerItemRenderer(SEA_LAMPREY);
-
-        registerItemRenderer(AMBER, 0, "amber_mosquito");
-        registerItemRenderer(AMBER, 1, "amber_aphid");
-
-        //registerItemRenderer(HELICOPTER, "helicopter_spawner");
-
-        registerItemRenderer(JURASSICRAFT_THEME_DISC, "disc_jurassicraft_theme");
-        registerItemRenderer(DONT_MOVE_A_MUSCLE_DISC, "disc_dont_move_a_muscle");
-        registerItemRenderer(TROODONS_AND_RAPTORS_DISC, "disc_troodons_and_raptors");
-
-        registerItemRenderer(AMBER_KEYCHAIN, "amber_keychain");
-        registerItemRenderer(AMBER_CANE, "amber_cane");
-        registerItemRenderer(MR_DNA_KEYCHAIN, "mr_dna_keychain");
-
-        registerItemRenderer(DINO_SCANNER, "dino_scanner");
-
-        registerItemRenderer(BASIC_CIRCUIT, "basic_circuit");
-        registerItemRenderer(ADVANCED_CIRCUIT, "advanced_circuit");
-
-        registerItemRenderer(GYPSUM_POWDER, "gypsum_powder");
-
-        registerItemRenderer(AJUGINUCULA_SMITHII_SEEDS, "ajuginucula_smithii_seeds");
-        registerItemRenderer(AJUGINUCULA_SMITHII_LEAVES, "ajuginucula_smithii_leaves");
-        registerItemRenderer(AJUGINUCULA_SMITHII_OIL, "ajuginucula_smithii_oil");
-
-        registerItemRenderer(ItemHandler.WILD_ONION, "wild_onion");
-        registerItemRenderer(ItemHandler.GRACILARIA);
-        
-        registerItemRenderer(ItemHandler.AULOPORA, "aulopora_coral");
-        
-        registerItemRenderer(ItemHandler.STYLOPHYLLOPSIS, "stylophyllopsis_coral");
-        
-        registerItemRenderer(ItemHandler.CLADOCHONUS, "cladochonus_coral");
-        
-        registerItemRenderer(ItemHandler.ENALLHELIA, "enallhelia_coral");
-        
-        registerItemRenderer(ItemHandler.HIPPURITES_RADIOSUS, "hippurites_radiosus_coral");
-        
-        registerItemRenderer(ItemHandler.LITHOSTROTION, "lithostrotion_coral");
-        
-        registerItemRenderer(LIQUID_AGAR, "liquid_agar");
-
-        registerItemRenderer(ItemHandler.PLANT_FOSSIL, "plant_fossil");
-        registerItemRenderer(TWIG_FOSSIL, "twig_fossil");
-
-        registerItemRenderer(KEYBOARD, "keyboard");
-        registerItemRenderer(COMPUTER_SCREEN, "computer_screen");
-        registerItemRenderer(DNA_ANALYZER, "dna_analyzer");
-
-        registerItemRenderer(CHILEAN_SEA_BASS, "chilean_sea_bass");
-        registerItemRenderer(FIELD_GUIDE, "field_guide");
-
-        registerItemRenderer(CAR_CHASSIS, "car_chassis");
-        registerItemRenderer(ENGINE_SYSTEM, "engine_system");
-        registerItemRenderer(CAR_SEATS, "car_seats");
-        registerItemRenderer(CAR_TIRE, "car_tire");
-        registerItemRenderer(CAR_WINDSCREEN, "car_windscreen");
-        registerItemRenderer(UNFINISHED_CAR, "unfinished_car");
         
 		for (int x = 0; x < VehicleItem.variants.length; x++) {
 			registerItemRenderer(VEHICLE_ITEM, x, VehicleItem.variants[x]);
 			registerItemRenderer(VEHICLE_ITEM, x, VehicleItem.variants[x]);
 			registerItemRenderer(VEHICLE_ITEM, x, VehicleItem.variants[x]);
 		}
-
-        registerItemRenderer(MURAL, "mural");
 
         for (Dinosaur dinosaur : EntityHandler.getDinosaurs().values()) {
             int meta = EntityHandler.getDinosaurId(dinosaur);
@@ -427,51 +349,19 @@ public enum RenderingHandler {
             String name = type.name().toLowerCase(Locale.ENGLISH);
             registerItemRenderer(ItemHandler.ANCIENT_DOORS.get(type), name + "_door_item");
         }
-
-        registerItemRenderer(PHOENIX_SEEDS);
-        registerItemRenderer(PHOENIX_FRUIT);
-
-        registerItemRenderer(CRICKETS);
-        registerItemRenderer(COCKROACHES);
-        registerItemRenderer(MEALWORM_BEETLES);
-
-        registerItemRenderer(FINE_NET);
-        registerItemRenderer(PLANKTON);
-        registerItemRenderer(KRILL);
-
-        registerItemRenderer(WILD_POTATO_SEEDS);
-        registerItemRenderer(WILD_POTATO);
-        registerItemRenderer(WILD_POTATO_COOKED);
-
-        registerItemRenderer(RHAMNUS_SEEDS);
-        registerItemRenderer(RHAMNUS_BERRIES);
-
-        registerItemRenderer(GOAT_RAW);
-        registerItemRenderer(GOAT_COOKED);
-        
-        registerItemRenderer(DART_GUN);
-        registerItemRenderer(DART_TRANQUILIZER, "dart_colored");
-        registerItemRenderer(DART_POISON_CYCASIN, "dart_colored");
-        registerItemRenderer(DART_POISON_EXECUTIONER_CONCOCTION, "dart_colored");
-        registerItemRenderer(DART_TIPPED_POTION, "dart_colored");
-
-        registerItemRenderer(WEST_INDIAN_LILAC_BERRIES);
     }
 
     public void preInit() {
         TabulaModelHandler.INSTANCE.addDomain(JurassiCraft.MODID);
-        registerRenderInfo(EntityHandler.BRACHIOSAURUS, new BrachiosaurusAnimator(), 1.5F);
-        registerRenderInfo(EntityHandler.COELACANTH, new CoelacanthAnimator(), 0.0F);
-//        registerRenderInfo(EntityHandler.ALLIGATORGAR, new AlligatorGarAnimator(), 0.0F);
-        registerRenderInfo(EntityHandler.DILOPHOSAURUS, new DilophosaurusAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.GALLIMIMUS, new GallimimusAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.PARASAUROLOPHUS, new ParasaurolophusAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.MICRORAPTOR, new MicroraptorAnimator(), 0.45F);
-        registerRenderInfo(EntityHandler.MUSSAURUS, new MussaurusAnimator(), 0.8F);
-        registerRenderInfo(EntityHandler.TRICERATOPS, new TriceratopsAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.TYRANNOSAURUS, new TyrannosaurusAnimator(), 0.65F);
-        registerRenderInfo(EntityHandler.VELOCIRAPTOR, new VelociraptorAnimator(), 0.45F);
-        //registerRenderInfo(EntityHandler.STEGOSAURUS, new StegosaurusAnimator(), 0.65F);
+        for (Dinosaur dinosaur : EntityHandler.DINOSAURS.values()) {
+            registerRenderInfo(dinosaur);
+            if (dinosaur.getMetadata().getAnimator() == null) {
+                JurassiCraft.getLogger().error(dinosaur + " his animator failed to load, make sure you add .setAnimator(new Animator)");
+            }
+            if(dinosaur.getMetadata().getAnimalClass() == null) {
+                JurassiCraft.getLogger().error(dinosaur + " doesn't have an animal class");
+            }
+        }
 
         RenderingRegistry.registerEntityRenderingHandler(PaddockSignEntity.class, new PaddockSignRenderer());
         RenderingRegistry.registerEntityRenderingHandler(AttractionSignEntity.class, new AttractionSignRenderer());
@@ -578,8 +468,8 @@ public enum RenderingHandler {
         registerBlockRenderer(block, 0, path);
     }
 
-    private static void registerRenderInfo(Dinosaur dinosaur, EntityAnimator<?> animator, float shadowSize) {
-        registerRenderInfo(new DinosaurRenderInfo(dinosaur, animator, shadowSize));
+    private static void registerRenderInfo(Dinosaur dinosaur) {
+        registerRenderInfo(new DinosaurRenderInfo(dinosaur, dinosaur.getMetadata().getAnimator(), dinosaur.getMetadata().getShadowsize()));
     }
 
     private static void registerRenderInfo(DinosaurRenderInfo renderInfo) {

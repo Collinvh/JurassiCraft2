@@ -5,6 +5,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.VelociraptorAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.SleepTime;
@@ -37,6 +38,7 @@ public class VelociraptorDinosaur extends Dinosaur {
                 .setSizeX(0.5F, 1.0F)
                 .setSizeY(0.5F, 1.8F)
                 .setStorage(27)
+				.setAnimator(new VelociraptorAnimator())
                 .setDiet(Diet.CARNIVORE.get())
                 .setSleepTime(SleepTime.DIURNAL)
                 .setBones("claw", "tooth", "skull", "foot_bones", "leg_bones", "neck_vertebrae", "ribcage", "shoulder_bone", "tail_vertebrae", "arm_bones")
@@ -46,6 +48,7 @@ public class VelociraptorDinosaur extends Dinosaur {
                 .setDefendOwner(true)
                 .setMaxHerdSize(18)
                 .setAttackBias(600.0)
+				.setTrackingRange(64)
                 .setCanClimb(true)
                 .setBreeding(false, 1, 7, 28, false, true)
                 .setJumpHeight(3)

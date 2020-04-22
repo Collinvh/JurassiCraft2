@@ -4,6 +4,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.MicroraptorAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.MicroraptorEntity;
@@ -26,6 +27,8 @@ public class MicroraptorDinosaur extends Dinosaur {
 	                .setStrength(0.5, 2)
 	                .setMaximumAge(this.fromDays(30))
 	                .setFlee(true)
+					.setAnimator(new MicroraptorAnimator())
+					.setTrackingRange(32)
 	                .setEyeHeight(0.2F, 0.5F)
 	                .setSizeX(0.2F, 0.7F)
 	                .setSizeY(0.25F, 0.6F)

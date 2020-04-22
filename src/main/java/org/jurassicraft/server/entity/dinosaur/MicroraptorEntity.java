@@ -29,6 +29,7 @@ import org.jurassicraft.client.model.animation.EntityAnimation;
 import org.jurassicraft.client.proxy.ClientProxy;
 import org.jurassicraft.client.sound.SoundHandler;
 import org.jurassicraft.server.entity.DinosaurEntity;
+import org.jurassicraft.server.entity.ai.EntityAIFleeRain;
 import org.jurassicraft.server.entity.ai.LeapingMeleeEntityAI;
 import org.jurassicraft.server.entity.ai.RaptorClimbTreeAI;
 import org.jurassicraft.server.entity.ai.RaptorLeapEntityAI;
@@ -44,8 +45,9 @@ public class MicroraptorEntity extends DinosaurEntity {
     public MicroraptorEntity(World world) {
         super(world);
         this.target(EntityChicken.class, EntityRabbit.class);
-        this.tasks.addTask(1, new LeapingMeleeEntityAI(this, this.dinosaur.getMetadata().getAttackSpeed()));
-        this.tasks.addTask(2, new RaptorClimbTreeAI(this, 1.0f));
+        this.tasks.addTask(2, new LeapingMeleeEntityAI(this, this.dinosaur.getMetadata().getAttackSpeed()));
+        this.tasks.addTask(3, new RaptorClimbTreeAI(this, 1.0f));
+        this.tasks.addTask(1, new EntityAIFleeRain(this, 1));
         this.animationTasks.addTask(3, new BirdPreenAnimationAI(this));
         this.animationTasks.addTask(3, new TailDisplayAnimationAI(this));
     }

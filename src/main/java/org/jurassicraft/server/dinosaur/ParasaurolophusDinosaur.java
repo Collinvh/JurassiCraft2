@@ -5,6 +5,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.ParasaurolophusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.dinosaur.ParasaurolophusEntity;
@@ -39,7 +40,9 @@ public class ParasaurolophusDinosaur extends Dinosaur {
                 .setSizeX(0.5F, 2.5F)
                 .setSizeY(0.8F, 3.5F)
                 .setOffset(0.0F, 0.0F, 0.6F)
-                .setStorage(36)
+				.setAnimator(new ParasaurolophusAnimator())
+				.shadowSize(0.8F)
+				.setStorage(36)
                 .setDiet(Diet.HERBIVORE.get())
                 .setBones("ribcage", "front_leg_bones", "hind_leg_bones", "neck_vertebrae", "pelvis", "shoulder_bone", "skull", "tail_vertebrae", "teeth")
                 .setHeadCubeName("Head")

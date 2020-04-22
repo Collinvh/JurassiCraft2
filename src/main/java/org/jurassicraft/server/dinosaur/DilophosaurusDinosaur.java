@@ -2,6 +2,7 @@ package org.jurassicraft.server.dinosaur;
 
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.OverlayType;
 import org.jurassicraft.server.entity.SleepTime;
@@ -39,9 +40,11 @@ public class DilophosaurusDinosaur extends Dinosaur {
 	                .setStorage(27)
 	                .setDiet(Diet.CARNIVORE.get())
 	                .setSleepTime(SleepTime.CREPUSCULAR)
+					.setAnimator(new DilophosaurusAnimator())
 	                .setBones("skull", "tooth", "arm_bones", "leg_bones", "neck", "pelvis", "ribcage", "shoulder", "tail_vertebrae")
 	                .setHeadCubeName("Head")
 	                .setScale(0.95F, 0.22F)
+					.setTrackingRange(64)
 	                .setImprintable(true)
 	                .setDefendOwner(true)
 	                .setMaxHerdSize(10)

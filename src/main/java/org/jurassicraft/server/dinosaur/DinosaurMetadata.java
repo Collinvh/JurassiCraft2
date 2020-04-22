@@ -5,6 +5,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 
+import org.jurassicraft.client.model.animation.EntityAnimator;
+import org.jurassicraft.server.conf.JurassiCraftConfig;
 import org.jurassicraft.server.entity.AnimalMetadata;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.DinosaurEntity;
@@ -19,8 +21,10 @@ import java.util.List;
 import java.util.function.Function;
 
 public class DinosaurMetadata extends AnimalMetadata {
-	
-	private Dinosaur.DinosaurType dinosaurType;
+
+    private int trackingrange = JurassiCraftConfig.ENTITIES.trackingrange;
+    private float shadowsize = 1;
+    private Dinosaur.DinosaurType dinosaurType;
     private int primaryEggColorMale, primaryEggColorFemale;
     private int secondaryEggColorMale, secondaryEggColorFemale;
     private Class<? extends DinosaurEntity> entityClass;
@@ -47,6 +51,7 @@ public class DinosaurMetadata extends AnimalMetadata {
     private boolean isImprintable;
     private boolean randomFlock = true;
     private float scaleInfant;
+    private EntityAnimator<?> animator;
     private float scaleAdult;
     private float offsetX;
     private float offsetY;
@@ -248,6 +253,18 @@ public class DinosaurMetadata extends AnimalMetadata {
     }
     public DinosaurMetadata setRecipe(final String[][] recipe) {
         this.recipe = recipe;
+        return this;
+    }
+    public DinosaurMetadata setAnimator(final EntityAnimator<?> animator) {
+        this.animator = animator;
+        return this;
+    }
+    public DinosaurMetadata shadowSize(final float shadowsize) {
+        this.shadowsize = shadowsize;
+        return this;
+    }
+    public DinosaurMetadata setTrackingRange(final int trackingRange) {
+        this.trackingrange = trackingRange;
         return this;
     }
     public DinosaurMetadata setSpawn(final int chance, final Biome[]... allBiomes) {
@@ -462,4 +479,7 @@ public class DinosaurMetadata extends AnimalMetadata {
     public DinosaurEntity construct(final World world) {
         return (DinosaurEntity) this.entityConstructor.apply(world);
     }
+    public EntityAnimator<?> getAnimator() { return this.animator; }
+    public float getShadowsize() { return this.shadowsize; }
+    public int getTrackingRange() { return this.trackingrange; }
 }

@@ -2,6 +2,7 @@ package org.jurassicraft.server.dinosaur;
 
 import java.util.HashMap;
 import org.jurassicraft.JurassiCraft;
+import org.jurassicraft.client.model.animation.entity.CoelacanthAnimator;
 import org.jurassicraft.server.entity.Diet;
 import org.jurassicraft.server.entity.SleepTime;
 import org.jurassicraft.server.entity.ai.util.MovementType;
@@ -44,6 +45,9 @@ public class CoelacanthDinosaur extends Dinosaur {
                 .setDiet(Diet.PISCIVORE.get().withModule(new Diet.DietModule(FoodType.FILTER)))
                 .setSleepTime(SleepTime.NO_SLEEP)
                 .setBirthType(BirthType.LIVE_BIRTH)
+				.setAnimator(new CoelacanthAnimator())
+				.shadowSize(0.0F)
+				.setTrackingRange(64)
                 .setBones("anal_fin", "caudal_fin", "first_dorsal_fin", "pectoral_fin_bones", "pelvic_fin_bones", "second_dorsal_fin", "skull", "spine", "teeth")
                 .setHeadCubeName("Head")
                 .setScale(1.8F, 0.22F)

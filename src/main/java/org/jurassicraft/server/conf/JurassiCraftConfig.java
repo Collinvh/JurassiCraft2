@@ -46,6 +46,8 @@ public class JurassiCraftConfig { //TODO: move all structures to same parent pac
         @Config.Name("Allow Carcass Spawning")
         public boolean allowCarcass = true;
 
+        @Config.Name("Visibility of dinosaurs")
+        public int trackingrange = 128;
     }
 
     public static class MineralGeneration {
