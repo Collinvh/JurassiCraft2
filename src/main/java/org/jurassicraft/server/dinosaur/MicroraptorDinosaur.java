@@ -31,6 +31,7 @@ public class MicroraptorDinosaur extends Dinosaur {
 					.setTrackingRange(32)
 	                .setEyeHeight(0.2F, 0.5F)
 	                .setSizeX(0.2F, 0.7F)
+					.setRotationAngle(270)
 	                .setSizeY(0.25F, 0.6F)
 	                .setStorage(9)
 	                .setDiet(new Diet().withModule(new Diet.DietModule(FoodType.INSECT)).withModule(new Diet.DietModule(FoodType.MEAT)))

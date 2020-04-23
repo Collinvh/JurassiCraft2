@@ -36,6 +36,7 @@ public class GallimimusDinosaur extends Dinosaur {
                 .setStrength(1, 5)
                 .setMaximumAge(this.fromDays(35))
                 .setEyeHeight(0.58F, 2.7F)
+				.setRotationAngle(100)
                 .setSizeX(0.3F, 1.2F)
                 .setSizeY(0.55F, 2.25F)
                 .setStorage(27)

@@ -45,6 +45,7 @@ public class TyrannosaurusDinosaur extends Dinosaur {
                 .setSizeX(0.45F, 3.0F)
                 .setSizeY(0.8F, 3.0F)
                 .setStorage(54)
+				.setRotationAngle(45)
                 .setDiet(Diet.CARNIVORE.get())
                 .setBones("arm_bones", "foot_bones", "leg_bones", "neck_vertebrae", "pelvis", "ribcage", "shoulder_bone", "skull", "tail_vertebrae", "tooth")
                 .setHeadCubeName("head")

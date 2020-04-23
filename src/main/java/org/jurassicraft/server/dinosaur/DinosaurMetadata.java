@@ -22,6 +22,8 @@ import java.util.function.Function;
 
 public class DinosaurMetadata extends AnimalMetadata {
 
+    private int wanderingRange = 15;
+    private float rotationAngle = 90;
     private int trackingrange = JurassiCraftConfig.ENTITIES.trackingrange;
     private float shadowsize = 1;
     private Dinosaur.DinosaurType dinosaurType;
@@ -267,6 +269,14 @@ public class DinosaurMetadata extends AnimalMetadata {
         this.trackingrange = trackingRange;
         return this;
     }
+    public DinosaurMetadata setRotationAngle(final float rotationAngle) {
+        this.rotationAngle = rotationAngle;
+        return this;
+    }
+    public DinosaurMetadata setWalkingRange(final int walkingRange) {
+        this.wanderingRange = walkingRange;
+        return this;
+    }
     public DinosaurMetadata setSpawn(final int chance, final Biome[]... allBiomes) {
         this.spawnChance = chance;
         List<Biome> spawnBiomes = new LinkedList<>();
@@ -482,4 +492,6 @@ public class DinosaurMetadata extends AnimalMetadata {
     public EntityAnimator<?> getAnimator() { return this.animator; }
     public float getShadowsize() { return this.shadowsize; }
     public int getTrackingRange() { return this.trackingrange; }
+    public float getRotationAngle() { return this.rotationAngle; }
+    public int getWanderingRange() { return this.wanderingRange; }
 }

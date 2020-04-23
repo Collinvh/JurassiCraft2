@@ -152,7 +152,7 @@ public class DinosaurWalkNodeProcessor extends WalkNodeProcessor {
                 }
 
                 if (type == PathNodeType.OPEN) {
-                    AxisAlignedBB boundsAtPoint = new AxisAlignedBB(x - halfWidth + 0.5, y + 0.001, z - halfWidth + 0.5, x + halfWidth + 0.5, (y + this.entity.height), z + halfWidth + 0.5);
+                    AxisAlignedBB boundsAtPoint = new AxisAlignedBB(x - halfWidth + 0.8, y + 0.002, z - halfWidth + 0.8, x + halfWidth + 0.8, (y + this.entity.height), z + halfWidth + 0.8);
 
                     if (this.entity.world.collidesWithAnyBlock(boundsAtPoint)) {
                         return null;

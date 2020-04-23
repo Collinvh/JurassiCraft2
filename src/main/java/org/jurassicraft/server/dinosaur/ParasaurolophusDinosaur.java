@@ -39,6 +39,7 @@ public class ParasaurolophusDinosaur extends Dinosaur {
                 .setEyeHeight(0.45F, 2.45F)
                 .setSizeX(0.5F, 2.5F)
                 .setSizeY(0.8F, 3.5F)
+				.setRotationAngle(60)
                 .setOffset(0.0F, 0.0F, 0.6F)
 				.setAnimator(new ParasaurolophusAnimator())
 				.shadowSize(0.8F)

@@ -41,6 +41,7 @@ public class TriceratopsDinosaur extends Dinosaur {
                 .setSizeY(0.6F, 3.0F)
                 .setStorage(36)
                 .setDiet(Diet.HERBIVORE.get())
+				.setRotationAngle(60)
                 .setBones("front_leg_bones", "hind_leg_bones", "horn", "neck_vertebrae", "pelvis", "ribcage", "shoulder_bone", "skull", "tail_vertebrae", "tooth")
                 .setHeadCubeName("Head")
                 .setScale(1.35F, 0.325F)

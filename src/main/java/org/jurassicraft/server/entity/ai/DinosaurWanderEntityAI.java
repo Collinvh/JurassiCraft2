@@ -94,7 +94,7 @@ public class DinosaurWanderEntityAI extends EntityAIBase
     }
     
     protected Vec3d getWanderPosition() {
-        return RandomPositionGenerator.getLandPos(this.entity, 10, 10);
+        return RandomPositionGenerator.getLandPos(this.entity, this.entity.getMetadata().getWanderingRange(), 10);
     }
     
     @Override

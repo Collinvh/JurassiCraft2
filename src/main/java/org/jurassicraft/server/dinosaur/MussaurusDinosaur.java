@@ -38,6 +38,7 @@ public class MussaurusDinosaur extends Dinosaur {
                 .setSizeX(0.25F, 1F)
                 .setSizeY(0.2F, 0.9F)
                 .setStorage(9)
+				.setRotationAngle(120)
 				.setAnimator(new MussaurusAnimator())
 				.setTrackingRange(64)
                 .setDiet(Diet.HERBIVORE.get())

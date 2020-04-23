@@ -45,6 +45,7 @@ public class VelociraptorDinosaur extends Dinosaur {
                 .setHeadCubeName("Head")
                 .setScale(1.3F, 0.3F)
                 .setImprintable(true)
+				.setRotationAngle(120)
                 .setDefendOwner(true)
                 .setMaxHerdSize(18)
                 .setAttackBias(600.0)

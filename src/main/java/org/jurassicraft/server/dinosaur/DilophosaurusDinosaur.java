@@ -33,6 +33,7 @@ public class DilophosaurusDinosaur extends Dinosaur {
 	                .setHealth(10, 30)
 	                .setSpeed(0.35, 0.40)
 	                .setStrength(2, 6)
+					.setRotationAngle(100)
 	                .setMaximumAge(this.fromDays(40))
 	                .setEyeHeight(0.35F, 1.8F)
 	                .setSizeX(0.4F, 1.2F)
