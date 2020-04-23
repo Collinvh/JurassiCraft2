@@ -278,7 +278,7 @@ public abstract class DinosaurEntity extends EntityCreature implements IEntityAd
         this.animationTasks.addTask(1, new DrinkEntityAI(this));
         this.animationTasks.addTask(1, new MateEntityAI(this));
         this.animationTasks.addTask(1, new EatFoodItemEntityAI(this));
-        //this.animationTasks.addTask(1, new FeederEntityAI(this));
+        this.animationTasks.addTask(1, new FeederEntityAI(this));
         this.animationTasks.addTask(3, new CallAnimationAI(this));
         this.animationTasks.addTask(3, new RoarAnimationAI(this));
         this.animationTasks.addTask(3, new LookAnimationAI(this));

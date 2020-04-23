@@ -16,71 +16,49 @@ import org.jurassicraft.server.entity.ai.Mutex;
 import org.jurassicraft.server.util.GameRuleHandler;
 
 public class FeederEntityAI extends EntityAIBase {
-    protected DinosaurEntity dinosaur;
-    private static ThreadPoolExecutor tpe = new ThreadPoolExecutor(0, 3, 10, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
-    protected volatile Path path;
-    protected volatile BlockPos feederPosition;
-    protected volatile boolean searched = false;
+	protected DinosaurEntity dinosaur;
+	protected Path path;
+	protected BlockPos feederPosition;
 
-    public FeederEntityAI(DinosaurEntity dinosaur) {
-        this.dinosaur = dinosaur;
-        this.setMutexBits(Mutex.METABOLISM);
-    }
+	public FeederEntityAI(DinosaurEntity dinosaur) {
+		this.dinosaur = dinosaur;
+		this.setMutexBits(Mutex.METABOLISM);
+	}
 
 	@Override
 	public boolean shouldExecute() {
 		if (!this.dinosaur.isCarcass() && !this.dinosaur.isMovementBlocked() && GameRuleHandler.DINO_METABOLISM.getBoolean(this.dinosaur.world)) {
 			if (this.dinosaur.getMetabolism().isHungry()) {
-				World world = this.dinosaur.world;
-				if (this.searched == false && tpe.getActiveCount() < 2) {
-
-					this.searched = true;
-					try {
-						tpe.execute(new ThreadRunnable(this, this.dinosaur) {
-
-							@Override
-							public void run() {
-								synchronized (world) {
-									synchronized (this.ai) {
-										try {
-											BlockPos feeder = this.entity.getClosestFeeder();
-											if (feeder != null) {
-												this.ai.feederPosition = feeder;
-												this.ai.path = this.entity.getNavigator().getPathToPos(this.ai.feederPosition);
-											}
-										} catch (Exception e) {
-
-										}
-									}
-									this.ai.searched = false;
-								}
-							}
-						});
-					} catch (RejectedExecutionException e) {
-
+				BlockPos feeder = this.dinosaur.getClosestFeeder();
+				if (feeder != null) {
+					this.feederPosition = feeder;
+					this.path = this.dinosaur.getNavigator().getPathToPos(this.feederPosition);
+					if (this.path != null) {
+						return this.dinosaur.getNavigator().setPath(this.path, 1.0);
 					}
 				}
 			}
 		}
 
-		return true;
+		return false;
 	}
 
-    @Override
-    public void updateTask() {
-    	
-        if (this.path == null)
-        	return;
+	@Override
+	public void updateTask() {
+		if (this.path == null)
+			return;
 		try {
 			this.dinosaur.getNavigator().setPath(this.path, 1.0);
 
-			if (!this.dinosaur.world.isRemote && (this.dinosaur.getDistance(this.feederPosition.getX(), this.feederPosition.getY(), this.feederPosition.getZ()) <= this.dinosaur.width * this.dinosaur.width || this.path.isFinished())) {
+			if (!this.dinosaur.world.isRemote && (this.dinosaur.getDistance(this.feederPosition.getX(), this.feederPosition.getY(), this.feederPosition.getZ()) <= this.dinosaur.width + this.dinosaur.width || this.path.isFinished())) {
 				TileEntity tile = this.dinosaur.world.getTileEntity(this.feederPosition);
 				if (tile instanceof FeederBlockEntity) {
 					FeederBlockEntity feeder = (FeederBlockEntity) tile;
 					if (feeder.canFeedDinosaur(this.dinosaur)) {
-						feeder.setOpen(true);
-						feeder.setFeeding(this.dinosaur);
+						if (!feeder.isEmpty()) {
+							feeder.setOpen(true);
+							feeder.setFeeding(this.dinosaur);
+						}
 					}
 				}
 				this.resetTask();
@@ -88,27 +66,16 @@ public class FeederEntityAI extends EntityAIBase {
 		} catch (NullPointerException e) {
 
 		}
-    }
+	}
 
-    @Override
-    public void resetTask() {
-        this.path = null;
-        this.dinosaur.getNavigator().clearPath();
-    }
+	@Override
+	public void resetTask() {
+		this.path = null;
+		this.dinosaur.getNavigator().clearPath();
+	}
 
-    @Override
-    public boolean shouldContinueExecuting() {
-        return this.dinosaur != null && this.path != null;
-    }
-    
-    abstract class ThreadRunnable implements Runnable {
-
-    	final DinosaurEntity entity;
-    	final FeederEntityAI ai;
-
-    	ThreadRunnable(FeederEntityAI feederEntityAI, DinosaurEntity entity) {
-    		this.ai = feederEntityAI;
-    		this.entity = entity;
-    	}
-    }
+	@Override
+	public boolean shouldContinueExecuting() {
+		return this.dinosaur != null && this.path != null && this.dinosaur.getMetabolism().isHungry();
+	}
 }
