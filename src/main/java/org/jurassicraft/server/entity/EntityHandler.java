@@ -63,7 +63,7 @@ public class EntityHandler {
 //    public static final Dinosaur ALLIGATORGAR = new AlligatorGarDinosaur();
     //public static final Dinosaur STEGeOSAURUS = new StegosaurusDinosaur();
 
-    public static final Map<Integer, Dinosaur> DINOSAURS = new HashMap<>();
+    private static final Map<Integer, Dinosaur> DINOSAURS = new HashMap<>();
     private static final Map<Integer, Animal> ANIMALS = new HashMap<>();
     private static final Map<Dinosaur, Integer> DINOSAUR_IDS = new HashMap<>();
     private static final Map<Animal, Integer> ANIMAL_IDS = new HashMap<>();

@@ -1,24 +1,36 @@
 package org.jurassicraft.client.render;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import javax.annotation.Nullable;
+import com.google.common.collect.Maps;
+import com.sun.istack.internal.Nullable;
+import net.ilexiconn.llibrary.client.model.tabula.TabulaModelHandler;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockDoor;
+import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EntityRenderer;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.IBlockColor;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.biome.BiomeColorHelper;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jurassicraft.JurassiCraft;
 import org.jurassicraft.client.model.MultipartStateMap;
-import org.jurassicraft.client.model.animation.EntityAnimator;
-import org.jurassicraft.client.model.animation.entity.BrachiosaurusAnimator;
-import org.jurassicraft.client.model.animation.entity.CoelacanthAnimator;
-import org.jurassicraft.client.model.animation.entity.DilophosaurusAnimator;
-import org.jurassicraft.client.model.animation.entity.GallimimusAnimator;
-import org.jurassicraft.client.model.animation.entity.MicroraptorAnimator;
-import org.jurassicraft.client.model.animation.entity.MussaurusAnimator;
-import org.jurassicraft.client.model.animation.entity.ParasaurolophusAnimator;
-import org.jurassicraft.client.model.animation.entity.TriceratopsAnimator;
-import org.jurassicraft.client.model.animation.entity.TyrannosaurusAnimator;
-import org.jurassicraft.client.model.animation.entity.VelociraptorAnimator;
 import org.jurassicraft.client.proxy.ClientProxy;
 import org.jurassicraft.client.render.block.*;
 import org.jurassicraft.client.render.entity.*;
@@ -45,35 +57,13 @@ import org.jurassicraft.server.entity.vehicle.TransportHelicopterEntity;
 import org.jurassicraft.server.item.*;
 import org.jurassicraft.server.plant.Plant;
 import org.jurassicraft.server.plant.PlantHandler;
-import com.google.common.collect.Maps;
-import net.ilexiconn.llibrary.client.model.tabula.TabulaModelHandler;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockDoor;
-import net.minecraft.block.BlockFenceGate;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.EntityRenderer;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.client.renderer.color.IBlockColor;
-import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.Item;
-import net.minecraft.world.ColorizerFoliage;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.biome.BiomeColorHelper;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import static org.jurassicraft.server.item.ItemHandler.*;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
 import static org.jurassicraft.server.block.BlockHandler.*;
+import static org.jurassicraft.server.item.ItemHandler.*;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(modid=JurassiCraft.MODID, value = Side.CLIENT)
@@ -353,14 +343,8 @@ public enum RenderingHandler {
 
     public void preInit() {
         TabulaModelHandler.INSTANCE.addDomain(JurassiCraft.MODID);
-        for (Dinosaur dinosaur : EntityHandler.DINOSAURS.values()) {
+        for (Dinosaur dinosaur : EntityHandler.getDinosaurs().values()) {
             registerRenderInfo(dinosaur);
-            if (dinosaur.getMetadata().getAnimator() == null) {
-                JurassiCraft.getLogger().error(dinosaur + " his animator failed to load, make sure you add .setAnimator(new Animator)");
-            }
-            if(dinosaur.getMetadata().getAnimalClass() == null) {
-                JurassiCraft.getLogger().error(dinosaur + " doesn't have an animal class");
-            }
         }
 
         RenderingRegistry.registerEntityRenderingHandler(PaddockSignEntity.class, new PaddockSignRenderer());
